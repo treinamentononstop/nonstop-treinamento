@@ -315,7 +315,7 @@ function ctx(){const n=new Date();return{day:n.getDay(),hour:n.getHours(),min:n.
 
 function render(){
   const c=ctx();
-  cur=SCH.find(s=>s.days.includes(c.day)&&c.tot>=s.hour*60+s.min&&c.tot<s.hour*60+s.min+s.dur)||null;
+  cur=SCH.find(s=>s.days.includes(c.day)&&c.tot>=(s.hour*60+s.min-15)&&c.tot<s.hour*60+s.min+s.dur)||null;
   const live=!!cur;
   document.getElementById('topbar-live').classList.toggle('show',live);
   document.getElementById('live-badge').classList.toggle('show',live);
@@ -338,7 +338,7 @@ function render(){
       document.getElementById('t-name').textContent=nx.name;
       document.getElementById('t-time').textContent='Hoje às '+pad(nx.hour)+'h'+(nx.min?pad(nx.min):'');
       document.getElementById('no-title').textContent='Nenhum treinamento acontecendo agora';
-      document.getElementById('no-msg').textContent='O próximo começa às '+pad(nx.hour)+'h. Volte em breve!';
+      document.getElementById('no-msg').textContent='O próximo é "'+nx.name+'" às '+pad(nx.hour)+'h. Abriremos o link 15 minutos antes do início.';
     }else{
       document.getElementById('t-eyebrow').textContent='Treinamentos Nonstop';
       document.getElementById('t-name').textContent=(c.day===0||c.day===6)?'Sem treinamentos hoje':'Sem treinamentos agora';
