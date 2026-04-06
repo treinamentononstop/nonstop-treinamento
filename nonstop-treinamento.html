@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Treinamentos Nonstop — Abril 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f4f0;
+    --surface: #ffffff;
+    --surface2: #f0efe9;
+    --text: #1a1a2e;
+    --text2: #6b6a72;
+    --text3: #a0a0a8;
+    --border: rgba(26,26,46,0.1);
+    --border2: rgba(26,26,46,0.18);
+    --accent: #1a1a2e;
+    --accent-text: #ffffff;
+    --blue: #1976d2;
+    --green: #2e7d32;
+    --green-bg: #e8f5e9;
+    --green-text: #1b5e20;
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem 4rem;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* subtle grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(26,26,46,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,26,46,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    text-align: center;
+    animation: fadeDown 0.5s ease both;
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .logo-mark {
+    width: 36px;
+    height: 36px;
+    background: var(--accent);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-mark svg { width: 20px; height: 20px; fill: #fff; }
+
+  .logo-text {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: var(--accent);
+  }
+
+  .header-sub {
+    font-size: 13px;
+    color: var(--text2);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── MAIN CARD ── */
+  .card {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.75rem;
+    box-shadow: 0 2px 24px rgba(26,26,46,0.07), 0 1px 4px rgba(26,26,46,0.04);
+    animation: fadeUp 0.5s ease 0.1s both;
+  }
+
+  /* ── TRAINING HEADER ── */
+  .t-eyebrow {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text3);
+    margin-bottom: 6px;
+  }
+
+  .t-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 1.25;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .t-time {
+    font-size: 13px;
+    color: var(--text2);
+    margin-bottom: 1.5rem;
+  }
+
+  .t-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #fef3c7;
+    color: #92400e;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+
+  .dot-live {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ef4444;
+    animation: pulse 1.5s infinite;
+  }
+
+  /* ── FORM ── */
+  .form { display: flex; flex-direction: column; gap: 12px; }
+
+  .field { display: flex; flex-direction: column; gap: 5px; }
+
+  .field label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text2);
+  }
+
+  .field input {
+    height: 44px;
+    padding: 0 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    -webkit-appearance: none;
+  }
+
+  .field input::placeholder { color: var(--text3); }
+
+  .field input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(26,26,46,0.08);
+    background: var(--surface);
+  }
+
+  .field input.error { border-color: #ef4444; }
+
+  .opt-label {
+    font-size: 11px;
+    color: var(--text3);
+    margin-left: 2px;
+  }
+
+  .btn-submit {
+    margin-top: 4px;
+    height: 50px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: opacity 0.15s, transform 0.1s;
+  }
+
+  .btn-submit:hover { opacity: 0.87; }
+  .btn-submit:active { transform: scale(0.98); }
+  .btn-submit:disabled { opacity: 0.45; cursor: not-allowed; }
+
+  .btn-submit svg { width: 16px; height: 16px; fill: #fff; }
+
+  /* ── NO TRAINING ── */
+  .no-training {
+    text-align: center;
+    padding: 1.5rem 0 0.5rem;
+  }
+
+  .no-icon {
+    font-size: 36px;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .no-training h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  .no-training p {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+
+  /* ── SUCCESS ── */
+  .success {
+    text-align: center;
+    padding: 0.5rem 0;
+    display: none;
+    animation: fadeUp 0.3s ease both;
+  }
+
+  .success-check {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--green-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+  }
+
+  .success-check svg { width: 28px; height: 28px; stroke: var(--green); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+  .success h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    margin-bottom: 6px;
+  }
+
+  .success p {
+    font-size: 14px;
+    color: var(--text2);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .btn-meet {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--blue);
+    color: #fff;
+    text-decoration: none;
+    padding: 13px 28px;
+    border-radius: 12px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    transition: opacity 0.15s, transform 0.1s;
+  }
+
+  .btn-meet:hover { opacity: 0.87; }
+  .btn-meet:active { transform: scale(0.98); }
+  .btn-meet svg { width: 16px; height: 16px; fill: #fff; }
+
+  /* ── SCHEDULE PILLS ── */
+  .schedule {
+    width: 100%;
+    animation: fadeUp 0.5s ease 0.2s both;
+  }
+
+  .schedule-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text3);
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .days-row {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .day-pill {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--text2);
+    background: var(--surface);
+    cursor: default;
+  }
+
+  .day-pill.today {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  /* ── TEST MODE BAR ── */
+  .test-bar {
+    width: 100%;
+    background: #fff8e1;
+    border: 1px dashed #f59e0b;
+    border-radius: 12px;
+    padding: 12px 16px;
+    animation: fadeUp 0.5s ease 0.3s both;
+  }
+
+  .test-bar-title {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #92400e;
+    margin-bottom: 8px;
+  }
+
+  .test-controls {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .test-controls select {
+    flex: 1;
+    min-width: 120px;
+    height: 34px;
+    padding: 0 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    border: 1px solid #f59e0b;
+    border-radius: 8px;
+    background: #fff;
+    color: #1a1a2e;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .test-controls input[type="time"] {
+    height: 34px;
+    padding: 0 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    border: 1px solid #f59e0b;
+    border-radius: 8px;
+    background: #fff;
+    color: #1a1a2e;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .btn-test {
+    height: 34px;
+    padding: 0 14px;
+    background: #f59e0b;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+  }
+
+  .btn-test:hover { opacity: 0.85; }
+
+  .btn-reset {
+    height: 34px;
+    padding: 0 12px;
+    background: transparent;
+    color: #92400e;
+    border: 1px solid #f59e0b;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+
+  .btn-reset:hover { opacity: 0.7; }
+
+  /* ── FOOTER ── */
+  .footer {
+    font-size: 12px;
+    color: var(--text3);
+    text-align: center;
+    line-height: 1.6;
+    animation: fadeUp 0.5s ease 0.35s both;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 500px) {
+    body { padding: 1.5rem 0.75rem 3rem; }
+    .card { padding: 1.5rem; }
+    .t-name { font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <span class="logo-text">NONSTOP</span>
+    </div>
+    <div class="header-sub">Treinamentos ao vivo · Gratuitos · De segunda a sexta</div>
+  </div>
+
+  <!-- MAIN CARD -->
+  <div class="card">
+
+    <!-- Training info -->
+    <div id="training-section">
+      <div class="t-eyebrow" id="t-eyebrow">Treinamento de agora</div>
+      <div class="t-name" id="t-name">Detectando...</div>
+      <div class="t-time" id="t-time"></div>
+
+      <!-- Live badge -->
+      <div id="live-badge" class="t-badge" style="display:none;">
+        <div class="dot-live"></div>
+        Ao vivo agora
+      </div>
+
+      <!-- Form -->
+      <div class="form" id="form-area">
+        <div class="field">
+          <label for="inp-nome">Seu nome</label>
+          <input type="text" id="inp-nome" placeholder="Como você se chama?" autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="inp-email">E-mail</label>
+          <input type="email" id="inp-email" placeholder="seu@email.com" autocomplete="email" />
+        </div>
+        <div class="field">
+          <label for="inp-phone">WhatsApp <span class="opt-label">(opcional)</span></label>
+          <input type="tel" id="inp-phone" placeholder="(11) 99999-9999" autocomplete="tel" />
+        </div>
+        <button class="btn-submit" id="btn-submit" onclick="handleSubmit()">
+          <svg viewBox="0 0 24 24"><path d="M15 10l5 5-5 5M4 4v7a4 4 0 004 4h12"/></svg>
+          Entrar no treinamento
+        </button>
+      </div>
+
+      <!-- No training -->
+      <div class="no-training" id="no-training" style="display:none;">
+        <span class="no-icon">☕</span>
+        <h3 id="no-title">Sem treinamento agora</h3>
+        <p id="no-msg">Confira a grade abaixo e volte no horário certo!</p>
+      </div>
+    </div>
+
+    <!-- Success -->
+    <div class="success" id="success-section">
+      <div class="success-check">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3>Tudo certo!</h3>
+      <p id="success-msg">Clique abaixo para entrar na reunião.</p>
+      <a class="btn-meet" id="meet-link" href="#" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M15 10l4.553-2.069A1 1 0 0121 8.845v6.31a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
+        Abrir Google Meet
+      </a>
+    </div>
+
+  </div>
+
+  <!-- SCHEDULE PILLS -->
+  <div class="schedule">
+    <div class="schedule-title">Grade desta semana</div>
+    <div class="days-row" id="days-row"></div>
+  </div>
+
+  <!-- TEST MODE BAR -->
+  <div class="test-bar">
+    <div class="test-bar-title">🧪 Modo de teste — simule dia e horário</div>
+    <div class="test-controls">
+      <select id="test-day">
+        <option value="1">Segunda-feira</option>
+        <option value="2">Terça-feira</option>
+        <option value="3">Quarta-feira</option>
+        <option value="4">Quinta-feira</option>
+        <option value="5">Sexta-feira</option>
+      </select>
+      <input type="time" id="test-time" value="09:00" />
+      <button class="btn-test" onclick="applyTest()">Simular</button>
+      <button class="btn-reset" onclick="resetTest()">Agora real</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    Seus dados são usados apenas para envio de<br />materiais e suporte Nonstop. Gratuito, sempre.
+  </div>
+
+</div>
+
+<script>
+const SCHEDULE = [
+  { days:[1,2,3,4,5], hour:9,  min:0,  dur:60, name:"Onboarding Nonstop",                       cat:"onboarding", link:"https://meet.google.com/mas-qkph-ndj" },
+  { days:[1,2,3,4,5], hour:14, min:0,  dur:60, name:"Onboarding Nonstop",                       cat:"onboarding", link:"https://meet.google.com/juf-tyma-dwp" },
+  { days:[1],         hour:8,  min:0,  dur:45, name:"Plantão de Dúvidas",                        cat:"plantao",    link:"https://meet.google.com/qya-gwra-aeq" },
+  { days:[2],         hour:16, min:0,  dur:45, name:"Plantão de Dúvidas",                        cat:"plantao",    link:"https://meet.google.com/jhu-sqhh-znr" },
+  { days:[3],         hour:8,  min:0,  dur:45, name:"Plantão de Dúvidas",                        cat:"plantao",    link:"https://meet.google.com/fvp-upvo-ghz" },
+  { days:[4],         hour:16, min:0,  dur:45, name:"Plantão de Dúvidas",                        cat:"plantao",    link:"https://meet.google.com/jhi-cfst-ewk" },
+  { days:[5],         hour:8,  min:0,  dur:45, name:"Plantão de Dúvidas",                        cat:"plantao",    link:"https://meet.google.com/zbt-hxwv-jcz" },
+  { days:[1],         hour:11, min:0,  dur:60, name:"Captação exclusiva",                        cat:"tematico",   link:"https://meet.google.com/ukb-nzfh-ikh" },
+  { days:[2],         hour:11, min:0,  dur:60, name:"Precificação",                              cat:"tematico",   link:"https://meet.google.com/jas-xtxo-rqw" },
+  { days:[3],         hour:11, min:0,  dur:60, name:"Site do corretor",                          cat:"tematico",   link:"https://meet.google.com/ydg-nuww-brg" },
+  { days:[4],         hour:11, min:0,  dur:60, name:"IA e Portais Imobiliários",                 cat:"tematico",   link:"https://meet.google.com/qmk-taci-xqw" },
+  { days:[5],         hour:11, min:0,  dur:60, name:"Por que trabalhar a Gestão exclusiva?",     cat:"tematico",   link:"https://meet.google.com/wgg-fsou-ksg" },
+];
+
+const DAY_SHORT = ["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"];
+const DAY_FULL  = ["Domingo","Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sábado"];
+
+let testMode = false;
+let testDay = null;
+let testHour = null;
+let testMin = null;
+let currentTraining = null;
+
+function getContext() {
+  if (testMode) return { day: testDay, hour: testHour, min: testMin, total: testHour*60+testMin };
+  const n = new Date();
+  return { day: n.getDay(), hour: n.getHours(), min: n.getMinutes(), total: n.getHours()*60+n.getMinutes() };
+}
+
+function findCurrent(ctx) {
+  return SCHEDULE.find(s =>
+    s.days.includes(ctx.day) &&
+    ctx.total >= s.hour*60+s.min &&
+    ctx.total <  s.hour*60+s.min+s.dur
+  ) || null;
+}
+
+function findNext(ctx) {
+  return SCHEDULE
+    .filter(s => s.days.includes(ctx.day) && s.hour*60+s.min > ctx.total)
+    .sort((a,b) => (a.hour*60+a.min)-(b.hour*60+b.min))[0] || null;
+}
+
+function pad(n) { return String(n).padStart(2,'0'); }
+
+function formatRange(s) {
+  const endTotal = s.hour*60+s.min+s.dur;
+  return pad(s.hour)+'h'+( s.min ? pad(s.min) : '' )+' – '+pad(Math.floor(endTotal/60))+'h'+pad(endTotal%60);
+}
+
+function render() {
+  const ctx = getContext();
+  currentTraining = findCurrent(ctx);
+
+  const eyebrow   = document.getElementById('t-eyebrow');
+  const tName     = document.getElementById('t-name');
+  const tTime     = document.getElementById('t-time');
+  const liveBadge = document.getElementById('live-badge');
+  const formArea  = document.getElementById('form-area');
+  const noSection = document.getElementById('no-training');
+  const noTitle   = document.getElementById('no-title');
+  const noMsg     = document.getElementById('no-msg');
+  const success   = document.getElementById('success-section');
+  const trainSec  = document.getElementById('training-section');
+
+  success.style.display = 'none';
+  trainSec.style.display = 'block';
+
+  if (currentTraining) {
+    eyebrow.textContent = testMode ? '🧪 Simulando — treinamento ativo' : 'Treinamento de agora';
+    tName.textContent   = currentTraining.name;
+    tTime.textContent   = DAY_FULL[ctx.day] + ' · ' + formatRange(currentTraining);
+    liveBadge.style.display = 'inline-flex';
+    formArea.style.display  = 'flex';
+    noSection.style.display = 'none';
+  } else {
+    liveBadge.style.display = 'none';
+    formArea.style.display  = 'none';
+    noSection.style.display = 'block';
+    const next = findNext(ctx);
+    if (next) {
+      eyebrow.textContent = testMode ? '🧪 Simulando — intervalo' : 'Próximo treinamento';
+      tName.textContent   = next.name;
+      tTime.textContent   = 'Hoje às ' + pad(next.hour) + 'h' + (next.min ? pad(next.min) : '');
+      noTitle.textContent = 'Nenhum treinamento acontecendo agora';
+      noMsg.textContent   = 'O próximo começa às ' + pad(next.hour) + 'h. Volte em breve!';
+    } else {
+      eyebrow.textContent = testMode ? '🧪 Simulando — sem treinamentos' : 'Treinamentos Nonstop';
+      tName.textContent   = ctx.day === 0 || ctx.day === 6 ? 'Fim de semana 😎' : 'Sem treinamentos agora';
+      tTime.textContent   = '';
+      noTitle.textContent = ctx.day === 0 || ctx.day === 6 ? 'Voltamos na segunda!' : 'Até amanhã!';
+      noMsg.textContent   = 'De segunda a sexta, sempre com novos treinamentos ao vivo.';
+    }
+  }
+
+  buildDays(ctx.day);
+}
+
+function buildDays(today) {
+  const row = document.getElementById('days-row');
+  const counts = {};
+  [1,2,3,4,5].forEach(d => { counts[d] = SCHEDULE.filter(s=>s.days.includes(d)).length; });
+  row.innerHTML = [1,2,3,4,5].map(d =>
+    `<div class="day-pill ${d===today?'today':''}">${DAY_SHORT[d]} (${counts[d]})</div>`
+  ).join('');
+}
+
+function handleSubmit() {
+  const nome  = document.getElementById('inp-nome').value.trim();
+  const email = document.getElementById('inp-email').value.trim();
+  const phone = document.getElementById('inp-phone').value.trim();
+
+  let valid = true;
+  ['inp-nome','inp-email'].forEach(id => document.getElementById(id).classList.remove('error'));
+
+  if (!nome)                      { document.getElementById('inp-nome').classList.add('error');  valid = false; }
+  if (!email || !email.includes('@')) { document.getElementById('inp-email').classList.add('error'); valid = false; }
+  if (!valid) return;
+  if (!currentTraining) return;
+
+  const btn = document.getElementById('btn-submit');
+  btn.disabled = true;
+  btn.textContent = 'Registrando...';
+
+  // ── Envio para Google Sheets via Apps Script ──────────────────────────
+  // Substitua a URL abaixo pela URL do seu Web App publicado no Apps Script
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/SEU_SCRIPT_ID_AQUI/exec';
+
+  const payload = {
+    timestamp:  new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
+    nome:       nome,
+    email:      email,
+    whatsapp:   phone,
+    treinamento: currentTraining.name,
+    horario:    formatRange(currentTraining),
+    dia:        DAY_FULL[getContext().day]
+  };
+
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(() => {});
+  // ──────────────────────────────────────────────────────────────────────
+
+  const firstName = nome.split(' ')[0];
+  document.getElementById('training-section').style.display = 'none';
+  document.getElementById('success-section').style.display  = 'block';
+  document.getElementById('success-msg').textContent =
+    'Olá, ' + firstName + '! Clique no botão abaixo para entrar no Google Meet.';
+
+  const lnk = document.getElementById('meet-link');
+  lnk.href = currentTraining.link;
+
+  setTimeout(() => { lnk.click(); }, 500);
+}
+
+function applyTest() {
+  const dayVal  = parseInt(document.getElementById('test-day').value);
+  const timeVal = document.getElementById('test-time').value;
+  const [h, m]  = timeVal.split(':').map(Number);
+  testMode = true;
+  testDay  = dayVal;
+  testHour = h;
+  testMin  = m;
+  render();
+}
+
+function resetTest() {
+  testMode = false;
+  render();
+}
+
+render();
+setInterval(() => { if (!testMode) render(); }, 60000);
+</script>
+</body>
+</html>
