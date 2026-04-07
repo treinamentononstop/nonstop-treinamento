@@ -396,24 +396,46 @@ function handleSubmit(){
 
 let nextTraining = null;
 
-function updateNextBox() {
+function getNextTraining() {
   const c = ctx();
-  const nx = SCH
-    .filter(s => s.days.includes(c.day) && s.hour*60+s.min > c.tot)
-    .sort((a,b) => (a.hour*60+a.min)-(b.hour*60+b.min))[0];
-  nextTraining = nx || null;
+  // Busca nos proximos 7 dias
+  for (let d = 0; d < 7; d++) {
+    const day = (c.day + d) % 7;
+    const candidates = SCH
+      .filter(s => s.days.includes(day) && (d > 0 || s.hour*60+s.min > c.tot))
+      .sort((a,b) => (a.hour*60+a.min)-(b.hour*60+b.min));
+    if (candidates.length > 0) return { training: candidates[0], daysAhead: d };
+  }
+  return null;
+}
+
+function updateNextBox() {
+  const result = getNextTraining();
   const box = document.getElementById('next-box');
-  if (!nx) { box.style.display='none'; return; }
+  if (!result) { box.style.display='none'; nextTraining = null; return; }
+
+  const { training: nx, daysAhead } = result;
+  nextTraining = nx;
+  nextDaysAhead = daysAhead;
   box.style.display = 'block';
   document.getElementById('next-name').textContent = nx.name;
-  document.getElementById('next-time').textContent = DAYS[c.day] + ' · ' + pad(nx.hour) + 'h' + (nx.min ? pad(nx.min) : '00');
+
+  const c = ctx();
+  const targetDay = (c.day + daysAhead) % 7;
+  const dayLabel = daysAhead === 0 ? 'Hoje' : daysAhead === 1 ? 'Amanhã' : DAYS[targetDay];
+  document.getElementById('next-time').textContent = dayLabel + ' · ' + pad(nx.hour) + 'h' + (nx.min ? pad(nx.min) : '00');
 }
+
+let nextDaysAhead = 0;
 
 function tickCountdown() {
   if (!nextTraining) return;
   const now = new Date();
   const target = new Date();
+  target.setDate(target.getDate() + nextDaysAhead);
   target.setHours(nextTraining.hour, nextTraining.min, 0, 0);
+  // Se já passou hoje, soma os dias
+  if (target <= now) { target.setDate(target.getDate() + 7); }
   let diff = Math.floor((target - now) / 1000);
   if (diff < 0) diff = 0;
   const h = Math.floor(diff / 3600);
