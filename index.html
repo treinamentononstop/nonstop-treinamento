@@ -104,6 +104,15 @@ body{background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-d
 .no-icon{font-size:36px;margin-bottom:12px;display:block;}
 .no-t h3{font-size:17px;font-weight:700;margin-bottom:6px;}
 .no-t p{font-size:13px;color:var(--text2);line-height:1.6;}
+.next-box{background:#f0f5ff;border:1px solid #c7d8f8;border-radius:10px;padding:14px 16px;margin-top:14px;text-align:left;}
+.next-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--navy2);margin-bottom:6px;}
+.next-name{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:3px;}
+.next-time{font-size:12px;color:var(--text2);margin-bottom:10px;}
+.countdown{display:flex;gap:8px;justify-content:center;}
+.cd-block{display:flex;flex-direction:column;align-items:center;background:var(--navy);border-radius:7px;padding:6px 10px;min-width:48px;}
+.cd-num{font-size:18px;font-weight:700;color:#fff;line-height:1;}
+.cd-lbl{font-size:9px;font-weight:500;color:rgba(255,255,255,.6);margin-top:3px;text-transform:uppercase;letter-spacing:.5px;}
+.notice-15{font-size:11px;color:var(--text3);text-align:center;margin-top:10px;}
 
 /* SUCCESS */
 .success{display:none;text-align:center;padding:8px 0;}
@@ -216,6 +225,17 @@ body{background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-d
         <span class="no-icon" style="font-size:32px;">📅</span>
         <h3 id="no-title">Nenhum treinamento agora</h3>
         <p id="no-msg">Confira a grade abaixo e volte no horário certo!</p>
+        <div class="next-box" id="next-box" style="display:none;">
+          <div class="next-label">Próximo treinamento</div>
+          <div class="next-name" id="next-name"></div>
+          <div class="next-time" id="next-time"></div>
+          <div class="countdown">
+            <div class="cd-block"><span class="cd-num" id="cd-h">00</span><span class="cd-lbl">horas</span></div>
+            <div class="cd-block"><span class="cd-num" id="cd-m">00</span><span class="cd-lbl">min</span></div>
+            <div class="cd-block"><span class="cd-num" id="cd-s">00</span><span class="cd-lbl">seg</span></div>
+          </div>
+          <div class="notice-15">🔔 Abriremos o link 15 minutos antes do início</div>
+        </div>
       </div>
     </div>
 
@@ -338,7 +358,7 @@ function render(){
       document.getElementById('t-name').textContent=nx.name;
       document.getElementById('t-time').textContent='Hoje às '+pad(nx.hour)+'h'+(nx.min?pad(nx.min):'');
       document.getElementById('no-title').textContent='Nenhum treinamento acontecendo agora';
-      document.getElementById('no-msg').textContent='O próximo é "'+nx.name+'" às '+pad(nx.hour)+'h. Abriremos o link 15 minutos antes do início.';
+      document.getElementById('no-msg').textContent='';
     }else{
       document.getElementById('t-eyebrow').textContent='Treinamentos Nonstop';
       document.getElementById('t-name').textContent=(c.day===0||c.day===6)?'Sem treinamentos hoje':'Sem treinamentos agora';
@@ -362,7 +382,7 @@ function handleSubmit(){
   const btn=document.getElementById('btn-submit');
   btn.disabled=true;btn.textContent='Registrando...';
   const c=ctx();
-  fetch('https://script.google.com/macros/s/SEU_SCRIPT_ID_AQUI/exec',{
+  fetch('https://script.google.com/macros/s/AKfycbzb59J14aFF0M0kxHANd6SKjdSfT0Umx7uoIJ7ouQeWY7iiLT2aP6lAyAaBm0mf7UfD/exec',{
     method:'POST',mode:'no-cors',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({timestamp:new Date().toLocaleString('pt-BR',{timeZone:'America/Sao_Paulo'}),nome,email,whatsapp:phone,treinamento:cur.name,horario:fmt(cur),dia:DAYS[c.day]})
@@ -374,8 +394,41 @@ function handleSubmit(){
   setTimeout(()=>{document.getElementById('meet-link').click();},600);
 }
 
+let nextTraining = null;
+
+function updateNextBox() {
+  const c = ctx();
+  const nx = SCH
+    .filter(s => s.days.includes(c.day) && s.hour*60+s.min > c.tot)
+    .sort((a,b) => (a.hour*60+a.min)-(b.hour*60+b.min))[0];
+  nextTraining = nx || null;
+  const box = document.getElementById('next-box');
+  if (!nx) { box.style.display='none'; return; }
+  box.style.display = 'block';
+  document.getElementById('next-name').textContent = nx.name;
+  document.getElementById('next-time').textContent = DAYS[c.day] + ' · ' + pad(nx.hour) + 'h' + (nx.min ? pad(nx.min) : '00');
+}
+
+function tickCountdown() {
+  if (!nextTraining) return;
+  const now = new Date();
+  const target = new Date();
+  target.setHours(nextTraining.hour, nextTraining.min, 0, 0);
+  let diff = Math.floor((target - now) / 1000);
+  if (diff < 0) diff = 0;
+  const h = Math.floor(diff / 3600);
+  const m = Math.floor((diff % 3600) / 60);
+  const s = diff % 60;
+  document.getElementById('cd-h').textContent = pad(h);
+  document.getElementById('cd-m').textContent = pad(m);
+  document.getElementById('cd-s').textContent = pad(s);
+}
+
 render();
-setInterval(render,60000);
+updateNextBox();
+setInterval(render, 60000);
+setInterval(updateNextBox, 60000);
+setInterval(tickCountdown, 1000);
 </script>
 </body>
 </html>
