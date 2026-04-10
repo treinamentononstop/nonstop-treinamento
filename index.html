@@ -968,5 +968,127 @@ body{background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-d
 
 
 
+<script>
+const SCH=[
+  {days:[1,2,3,4,5],hour:9, min:0,dur:60,name:"Onboarding Nonstop",link:"https://meet.google.com/mas-qkph-ndj"},
+  {days:[1,2,3,4,5],hour:14,min:0,dur:60,name:"Onboarding Nonstop",link:"https://meet.google.com/juf-tyma-dwp"},
+  {days:[1],hour:8,min:0,dur:45,name:"Plantão de Dúvidas",link:"https://meet.google.com/qya-gwra-aeq"},
+  {days:[2],hour:16,min:0,dur:45,name:"Plantão de Dúvidas",link:"https://meet.google.com/jhu-sqhh-znr"},
+  {days:[3],hour:8,min:0,dur:45,name:"Plantão de Dúvidas",link:"https://meet.google.com/fvp-upvo-ghz"},
+  {days:[4],hour:16,min:0,dur:45,name:"Plantão de Dúvidas",link:"https://meet.google.com/jhi-cfst-ewk"},
+  {days:[5],hour:8,min:0,dur:45,name:"Plantão de Dúvidas",link:"https://meet.google.com/zbt-hxwv-jcz"},
+  {days:[1],hour:11,min:0,dur:60,name:"Captação de imóveis exclusivos",link:"https://meet.google.com/ukb-nzfh-ikh"},
+  {days:[2],hour:11,min:0,dur:60,name:"Como Precificar os Imóveis",link:"https://meet.google.com/jas-xtxo-rqw"},
+  {days:[3],hour:11,min:0,dur:60,name:"Site do Corretor e Catálogo Meta",link:"https://meet.google.com/ydg-nuww-brg"},
+  {days:[4],hour:11,min:0,dur:60,name:"IA e Portais Imobiliários",link:"https://meet.google.com/qmk-taci-xqw"},
+  {days:[5],hour:11,min:0,dur:60,name:"Por que trabalhar a Gestão exclusiva?",link:"https://meet.google.com/wgg-fsou-ksg"},
+];
+const DAYS=["Domingo","Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sábado"];
+let cur=null,nextTraining=null,nextDaysAhead=0;
+function pad(n){return String(n).padStart(2,'0');}
+function fmt(s){const e=s.hour*60+s.min+s.dur;return pad(s.hour)+'h'+(s.min?pad(s.min):'')+' – '+pad(Math.floor(e/60))+'h'+pad(e%60);}
+function ctx(){const n=new Date();return{day:n.getDay(),hour:n.getHours(),min:n.getMinutes(),tot:n.getHours()*60+n.getMinutes()};}
+function render(){
+  const c=ctx();
+  cur=SCH.find(s=>s.days.includes(c.day)&&c.tot>=(s.hour*60+s.min-15)&&c.tot<s.hour*60+s.min+s.dur)||null;
+  document.getElementById('topbar-live').classList.toggle('show',!!cur);
+  document.getElementById('live-badge').classList.toggle('show',!!cur);
+  document.getElementById('success-section').style.display='none';
+  document.getElementById('training-section').style.display='block';
+  if(cur){
+    document.getElementById('t-eyebrow').textContent='Treinamento de agora';
+    document.getElementById('t-name').textContent=cur.name;
+    document.getElementById('t-time').textContent=DAYS[c.day]+' · '+fmt(cur);
+    document.getElementById('form-area').style.display='flex';
+    document.getElementById('no-training').style.display='none';
+    document.getElementById('form-divider').style.display='block';
+  }else{
+    document.getElementById('form-area').style.display='none';
+    document.getElementById('form-divider').style.display='none';
+    document.getElementById('no-training').style.display='block';
+    document.getElementById('t-eyebrow').textContent='Treinamentos Nonstop';
+    document.getElementById('t-name').textContent='Sem treinamentos agora';
+    document.getElementById('t-time').textContent='';
+  }
+}
+function getNextTraining(){
+  const c=ctx();
+  for(let d=0;d<7;d++){
+    const day=(c.day+d)%7;
+    const cands=SCH.filter(s=>s.days.includes(day)&&(d>0||s.hour*60+s.min>c.tot)).sort((a,b)=>(a.hour*60+a.min)-(b.hour*60+b.min));
+    if(cands.length>0)return{training:cands[0],daysAhead:d};
+  }
+  return null;
+}
+function updateNextBox(){
+  const result=getNextTraining();
+  const box=document.getElementById('next-box');
+  if(!result){box.style.display='none';nextTraining=null;return;}
+  const{training:nx,daysAhead}=result;
+  nextTraining=nx;nextDaysAhead=daysAhead;
+  box.style.display='block';
+  document.getElementById('next-name').textContent=nx.name;
+  const c=ctx();
+  const targetDay=(c.day+daysAhead)%7;
+  const dayLabel=daysAhead===0?'Hoje':daysAhead===1?'Amanhã':DAYS[targetDay];
+  document.getElementById('next-time').textContent=dayLabel+' · '+pad(nx.hour)+'h'+(nx.min?pad(nx.min):'00');
+}
+function tickCountdown(){
+  if(!nextTraining)return;
+  const now=new Date();
+  const target=new Date();
+  target.setDate(target.getDate()+nextDaysAhead);
+  target.setHours(nextTraining.hour,nextTraining.min,0,0);
+  if(target<=now)target.setDate(target.getDate()+7);
+  let diff=Math.floor((target-now)/1000);
+  if(diff<0)diff=0;
+  document.getElementById('cd-h').textContent=pad(Math.floor(diff/3600));
+  document.getElementById('cd-m').textContent=pad(Math.floor((diff%3600)/60));
+  document.getElementById('cd-s').textContent=pad(diff%60);
+}
+function toggleExtra(selId,inputId){
+  const sel=document.getElementById(selId);
+  const inp=document.getElementById(inputId);
+  inp.style.display=sel.value==='outro'?'block':'none';
+  if(sel.value==='outro')inp.focus();
+}
+function getFieldValue(selId,inputId){
+  const sel=document.getElementById(selId);
+  if(sel.value==='outro'){const txt=document.getElementById(inputId).value.trim();return txt||'Outro';}
+  if(sel.value==='autonomo')return'Autônomo(a)';
+  if(sel.value==='nonstop')return'Apenas Nonstop';
+  return sel.value||'';
+}
+function handleSubmit(){
+  const nome=document.getElementById('inp-nome').value.trim();
+  const email=document.getElementById('inp-email').value.trim();
+  const phone=document.getElementById('inp-phone').value.trim();
+  const imob=getFieldValue('inp-imob','inp-imob-outro');
+  const crm=getFieldValue('inp-crm','inp-crm-outro');
+  ['inp-nome','inp-email','inp-phone','inp-imob','inp-crm'].forEach(id=>document.getElementById(id).classList.remove('error'));
+  let ok=true;
+  if(!nome){document.getElementById('inp-nome').classList.add('error');ok=false;}
+  if(!email||!email.includes('@')){document.getElementById('inp-email').classList.add('error');ok=false;}
+  if(!phone){document.getElementById('inp-phone').classList.add('error');ok=false;}
+  if(!document.getElementById('inp-imob').value){document.getElementById('inp-imob').classList.add('error');ok=false;}
+  if(!document.getElementById('inp-crm').value){document.getElementById('inp-crm').classList.add('error');ok=false;}
+  if(!ok||!cur)return;
+  const btn=document.getElementById('btn-submit');
+  btn.disabled=true;btn.textContent='Registrando...';
+  const c=ctx();
+  fetch('https://script.google.com/macros/s/AKfycbzb59J14aFF0M0kxHANd6SKjdSfT0Umx7uoIJ7ouQeWY7iiLT2aP6lAyAaBm0mf7UfD/exec',{
+    method:'POST',mode:'no-cors',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({timestamp:new Date().toLocaleString('pt-BR',{timeZone:'America/Sao_Paulo'}),nome,email,whatsapp:phone,imobiliaria:imob,crm,treinamento:cur.name,horario:fmt(cur),dia:DAYS[c.day]})
+  }).catch(()=>{});
+  document.getElementById('training-section').style.display='none';
+  document.getElementById('success-section').style.display='block';
+  document.getElementById('success-msg').textContent='Olá, '+nome.split(' ')[0]+'! Clique abaixo para entrar.';
+  document.getElementById('meet-link').href=cur.link;
+  setTimeout(()=>{document.getElementById('meet-link').click();},600);
+}
+render();updateNextBox();
+setInterval(render,60000);setInterval(updateNextBox,60000);setInterval(tickCountdown,1000);
+</script>
 </body>
 </html>
