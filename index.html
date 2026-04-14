@@ -180,6 +180,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-d
   .hero-grid{grid-template-columns:1fr;}
   .banner{flex-direction:column;align-items:flex-start;gap:14px;padding:22px 20px;}
   .banner-divider{display:none;}
+  .banner-text{flex-direction:column !important;gap:14px !important;}
   .brands-strip{padding:18px 20px;}
   .logos-strip{}
   .logo-item-s{min-width:70px;max-width:100px;padding:10px 8px;}
@@ -992,15 +993,25 @@ body{background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-d
 <div class="banner">
   <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAaUAAADACAYAAACknHzzAAABCGlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGA8wQAELAYMDLl5JUVB7k4KEZFRCuwPGBiBEAwSk4sLGHADoKpv1yBqL+viUYcLcKakFicD6Q9ArFIEtBxopAiQLZIOYWuA2EkQtg2IXV5SUAJkB4DYRSFBzkB2CpCtkY7ETkJiJxcUgdT3ANk2uTmlyQh3M/Ck5oUGA2kOIJZhKGYIYnBncAL5H6IkfxEDg8VXBgbmCQixpJkMDNtbGRgkbiHEVBYwMPC3MDBsO48QQ4RJQWJRIliIBYiZ0tIYGD4tZ2DgjWRgEL7AwMAVDQsIHG5TALvNnSEfCNMZchhSgSKeDHkMyQx6QJYRgwGDIYMZAKbWPz9HbOBQAAAaHUlEQVR4nO3deX8cxZkH8F91j6S5jE0OAwHfB7iced" alt="Nonstop" class="banner-logo"/>
   <div class="banner-divider"></div>
-  <div class="banner-text">
-    <div class="banner-title">Treinamentos ao vivo — Abril 2026</div>
-    <div class="banner-desc">Plantão de dúvidas e onboarding todos os dias úteis!<br>Cada dia com um treinamento temático específico. Participe!</div>
-    <div class="banner-pills">
-      <div class="banner-pill">📋 Onboarding</div>
-      <div class="banner-pill">💰 Precificação</div>
-      <div class="banner-pill">🏠 Captação Exclusiva</div>
-      <div class="banner-pill">🤖 IA Imobiliária</div>
-      <div class="banner-pill">💬 Plantão de Dúvidas</div>
+  <div class="banner-text" style="display:flex;align-items:center;gap:28px;">
+    <div style="flex:1;min-width:0;">
+      <div class="banner-title">Treinamentos ao vivo — Abril 2026</div>
+      <div class="banner-desc">Plantão de dúvidas e onboarding todos os dias úteis!<br>Cada dia com um treinamento temático específico. Participe!</div>
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:4px;">
+        <a href="#agenda-training" style="display:inline-flex;align-items:center;height:42px;padding:0 22px;background:#ffffff;color:#0d2d6b;border-radius:999px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:800;text-decoration:none;white-space:nowrap;transition:opacity .15s,transform .15s;" onmouseover="this.style.opacity='.88';this.style.transform='translateY(-1px)';" onmouseout="this.style.opacity='1';this.style.transform='';">Entrar no treinamento agora</a>
+        <a href="#agenda-training" style="display:inline-flex;align-items:center;height:42px;padding:0 4px;background:transparent;color:#ffffff;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:3px;white-space:nowrap;transition:opacity .15s;" onmouseover="this.style.opacity='.75';" onmouseout="this.style.opacity='1';">Ver agenda completa</a>
+      </div>
+    </div>
+    <div style="flex-shrink:0;display:flex;flex-direction:column;gap:6px;align-items:flex-start;">
+      <div style="display:flex;gap:6px;">
+        <div class="banner-pill">📋 Onboarding</div>
+        <div class="banner-pill">💰 Precificação</div>
+        <div class="banner-pill">🏠 Captação Exclusiva</div>
+      </div>
+      <div style="display:flex;gap:6px;">
+        <div class="banner-pill">🤖 IA Imobiliária</div>
+        <div class="banner-pill">💬 Plantão de Dúvidas</div>
+      </div>
     </div>
   </div>
 </div>
@@ -1530,16 +1541,5 @@ setInterval(render,60000);setInterval(updateNextBox,60000);setInterval(tickCount
 <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.86 11.86 0 0 0 12.07 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.96L0 24l6.31-1.66a11.87 11.87 0 0 0 5.76 1.47h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.16-3.46-8.43Z"/></svg>
 </span>
 Falar com suporte no WhatsApp</a>
-      <a class="support-chip" href="mailto:<span class="icon">
-<svg viewBox="0 0 24 24"><path d="M2 4h20v16H2V4zm10 7 10-6H2l10 6zm0 2L2 7v11h20V7l-10 6z"/></svg>
-</span>
-Enviar email para suporte"><span class="icon">
-<svg viewBox="0 0 24 24"><path d="M2 4h20v16H2V4zm10 7 10-6H2l10 6zm0 2L2 7v11h20V7l-10 6z"/></svg>
-</span>
-Enviar email para suporte</a>
-    </div>
-  </div>
-</footer>
 
-</body>
-</html>
+    </div>
