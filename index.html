@@ -22,7 +22,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-d
 
 /* TOPBAR */
 .topbar{width:100%;background:var(--white);height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;position:sticky;top:0;z-index:100;box-shadow:0 1px 0 var(--border);}
-.topbar-center{position:absolute;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;}
+.topbar-center{display:flex;flex-direction:column;align-items:flex-start;gap:4px;margin-left:24px;}
 .topbar-center-label{font-size:8px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:var(--text3);}
 .topbar-center-links{display:flex;align-items:center;gap:6px;}
 .topbar-nav{display:flex;align-items:center;gap:6px;}
@@ -602,9 +602,9 @@ body{background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-d
 
 
 /* TOPBAR CENTER — CANAIS */
-.topbar-center{position:absolute;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;pointer-events:none;}
+.topbar-center{display:flex;flex-direction:column;align-items:flex-start;gap:4px;}
 .topbar-center-label{font-size:8px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--text3);}
-.topbar-center-links{display:flex;align-items:center;gap:6px;pointer-events:all;}
+.topbar-center-links{display:flex;align-items:center;gap:6px;}
 .topbar-social-btn{display:inline-flex;align-items:center;gap:5px;height:30px;padding:0 10px;border-radius:6px;text-decoration:none;font-size:11px;font-weight:700;border:1px solid var(--border);color:var(--text2);background:transparent;transition:background .12s;}
 .topbar-social-btn:hover{background:#f1f5f9;}
 .topbar-social-btn svg{width:13px;height:13px;fill:currentColor;flex-shrink:0;}
@@ -825,6 +825,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-d
 <body>
 
 <div class="topbar">
+  <div style="display:flex;align-items:center;gap:20px;">
   <img src="data:image/svg+xml;base64,PHN2ZyBpZD0iQ2FtYWRhXzEiIGRhdGEtbmFtZT0iQ2FtYWRhIDEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDE0MCA2My42Ij48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6IzBkMmQ2Yjt9PC9zdHlsZT48L2RlZnM+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNDEuNzIsMzcuNTlhNi4xNiw2LjE2LDAsMSwxLDYuMDktNi4xMiw2LDYsMCwwLDEtNi4wOSw2LjEyWm0wLTEzLjY1YTcuNSw3LjUsMCwxLDAsNy41Nyw3LjUzQTcuNCw3LjQsMCwwLDAsNDEuNzIsMjMuOTRaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTA3Ljg3LDMwLjYzdi43OGE1LjcxLDUuNzEsMCwwLDAsNy4xOCw1LjZsLjI3LS4wOWE2LDYsMCwwLDAsMy0yLjI3LDYuMTQsNi4xNCwwLDAsMCwxLjEtMy41OSw2LDYsMCwwLDAtNi02LjEySDExM0E1LjYzLDUuNjMsMCwwLDAsMTA3Ljg3LDMwLjYzWm0xMywuNDZhNy4yNCw3LjI0LDAsMCwxLTcuMjEsNy41LDcsNywwLDAsMS01LjgyLTIuODd2Ny43NWEuODcuODcsMCwwLDEtLjA1LjI4Ljc0Ljc0LDAsMCwxLS40LjQuODcuODcsMCwwLDEtLjI4LjA1LjkyLjkyLDAsMCwxLS4yOC0uMDUuNjMuNjMsMCwwLDEtLjIzLS4xNi43OC43OCwwLDAsMS0uMTYtLjI0LjY3LjY3LDAsMCwxLS4wNi0uMjhWMjQuNjhhLjcxLjcxLDAsMCwxLC4wNi0uMjguNjMuNjMsMCwwLDEsLjE2LS4yMy41My41MywwLDAsMSwuMjMtLjE2LjcxLjcxLDAsMCwxLC4yOC0uMDYuNjcuNjcsMCwwLDEsLjI4LjA2Ljc2Ljc2LDAsMCwxLC40LjM5LjkyLjkyLDAsMCwxLC4wNS4yOHYxLjc1YTcsNywwLDAsMSw1LjgyLTIuODRBNy4yMyw3LjIzLDAsMCwxLDEyMC45LDMxLjA5WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTk3LjQxLDM3LjE3QTYuMTYsNi4xNiwwLDEsMSwxMDMuNSwzMSw2LDYsMCwwLDEsOTcuNDEsMzcuMTdabTAtMTMuNTZhNy4zOSw3LjM5LDAsMCwwLTcuNTQsNy41Myw3LjQ2LDcuNDYsMCwwLDAsMyw2SDg3Yy0yLjU2LDAtMy43OC0xLjMyLTMuNzgtNFYyNS41N0g4OGEuNzUuNzUsMCwwLDAsLjc3LS42NmMwLS40NC0uMzQtLjY2LS43Ny0uNjZIODMuMjRWMjAuMTNBLjczLjczLDAsMCwwLDgyLDE5LjYxYS43Ni43NiwwLDAsMC0uMjEuNTJ2NC4wNWgtMi43YTYuMzIsNi4zMiwwLDAsMC01Ljg0LDMuOWMtLjg2LDIuMjctMS41MSw0LjA4LTIuNDIsNmE0LjYyLDQuNjIsMCwwLDEtNC42MSwzLjA2SDY1LjE1YS43OS43OSwwLDAsMS0uNzctLjc3VjMxLjIxYzAtMy42My0yLjA3LTctNi43Mi03cy02LjczLDMuNC02LjczLDd2Ni41N2EuNzMuNzMsMCwwLDAsLjEyLjQxLjY2LjY2LDAsMCwwLC4zMy4yNi44Mi44MiwwLDAsMCwuMzEsMCwuNjkuNjksMCwwLDAsLjI5LS4xMi43OS43OSwwLDAsMCwuMjEtLjI0LjY3LjY3LDAsMCwwLC4wNy0uMzF2LTYuNmMwLTIuNzQsMS40MS01LjY4LDUuMzktNS42OFM2MywyOC40Nyw2MywzMS4yMXY1LjE4YTIsMiwwLDAsMCwuMTUuNzcsMiwyLDAsMCwwLC40NC42NywyLjI2LDIuMjYsMCwwLDAsLjY1LjQ0LDIuMzEsMi4zMSwwLDAsMCwuNzguMTZoMS4xNWE2LjIzLDYuMjMsMCwwLDAsNS44NC0zLjljLjkyLTIuNDMsMS40OC0zLjczLDIuNDItNmE0LjU2LDQuNTYsMCwwLDEsNC42Mi0zLjA2SDgxLjh2LjA4aDB2Ny41NGMwLDMuNDgsMS45LDUuNDgsNS4yMyw1LjQ4bDEwLjQsMGE3LjUsNy41LDAsMSwwLDAtMTVaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjUuODIsMjQuMThjLTQuNjQsMC02LjcyLDMuNC02LjcyLDd2Ni41NmEuNzIuNzIsMCwwLDAsLjEyLjQuNy43LDAsMCwwLC4zMy4yNi41NS41NSwwLDAsMCwuMzEsMCwuNzkuNzksMCwwLDAsLjMtLjEyLjY4LjY4LDAsMCwwLC4yLS4yNC42My42MywwLDAsMCwuMDctLjNWMzEuMjFjMC0yLjc0LDEuNDEtNS42OCw1LjM5LTUuNjhzNS4zOSwyLjk0LDUuMzksNS42OFYzNy44YS42My42MywwLDAsMCwuMDcuMy42OC42OCwwLDAsMCwuMi4yNC41Ni41NiwwLDAsMCwuMy4xMi41NS41NSwwLDAsMCwuMzEsMCwuNjYuNjYsMCwwLDAsLjMzLS4yNi43LjcsMCwwLDAsLjEyLS40VjMxLjIxQzMyLjUzLDI3LjU4LDMwLjQ2LDI0LjE5LDI1LjgyLDI0LjE4WiIvPjwvc3ZnPg==" alt="Nonstop" class="logo-topbar" style="filter:none;"/>
 
   <div class="topbar-center">
@@ -844,6 +845,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-d
       </a>
     </div>
   </div>
+  </div><!-- end topbar-left -->
 
   <div class="topbar-nav">
     <a href="#main-card" class="topbar-btn-nav primary">Entrar no treinamento</a>
