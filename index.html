@@ -321,14 +321,17 @@ body{background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-d
 .ci-em{background:#f1f5f9;}
 .cn{font-size:8px;font-weight:700;line-height:1.25;display:block;}
 .cs{font-size:7px;display:block;margin-top:1px;opacity:.8;}
-.ci-on .cn,.ci-on .cs{color:#fff;}
-.ci-tem .cn{color:#fff;}
+.cdur{font-size:6.5px;display:block;margin-top:2px;opacity:.65;font-weight:500;}
+.ci-on .cn,.ci-on .cs,.ci-on .cdur{color:#fff;}
+.ci-tem .cn,.ci-tem .cdur{color:#fff;}
 .ci-tem .cs{color:rgba(255,255,255,.85);}
 .ci-pl .cn{color:#1d4ed8;font-size:7px;}
+.ci-pl .cdur{color:#1d4ed8;}
 .ci-em .cn{color:#94a3b8;font-size:14px;font-weight:300;}
-.leg{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;padding-top:10px;border-top:1px solid var(--border);}
-.li{display:flex;align-items:center;gap:5px;font-size:9px;font-weight:600;color:var(--text2);}
-.ld{width:8px;height:8px;border-radius:2px;flex-shrink:0;}
+.leg{display:flex;flex-direction:column;gap:6px;margin-top:12px;padding-top:10px;border-top:1px solid var(--border);}
+.li{display:flex;align-items:flex-start;gap:6px;font-size:9px;font-weight:600;color:var(--text2);line-height:1.4;}
+.li strong{color:var(--text);}
+.ld{width:8px;height:8px;border-radius:2px;flex-shrink:0;margin-top:2px;}
 
 /* PLANS */
 .plans-section{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(15,23,42,0.06);}
@@ -499,6 +502,8 @@ body{background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-d
 .hero-badge{display:inline-block;background:rgba(255,255,255,0.1);padding:8px 20px;border-radius:999px;font-size:13px;font-weight:800;margin-bottom:24px;color:#60a5fa;}
 .hero h1{font-size:56px;line-height:1.1;font-weight:800;margin-bottom:20px;letter-spacing:-1.5px;}
 .hero p{font-size:22px;line-height:1.4;color:rgba(255,255,255,0.8);max-width:750px;margin:0 auto;font-weight:500;}
+.hero-cta-btn{display:inline-flex;align-items:center;gap:8px;margin-top:36px;padding:14px 28px;background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.35);border-radius:999px;color:#fff;font-size:15px;font-weight:700;text-decoration:none;letter-spacing:0.2px;backdrop-filter:blur(6px);transition:background .18s,border-color .18s,transform .18s;}
+.hero-cta-btn:hover{background:rgba(255,255,255,0.22);border-color:rgba(255,255,255,0.6);transform:translateY(-2px);}
 /* PARCEIROS */
 .partners-section{width:100%;background:#fff;padding:40px 24px;border-bottom:1px solid var(--border);position:relative;z-index:50;}
 .partners-inner{max-width:1100px;margin:0 auto;text-align:center;}
@@ -864,6 +869,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-d
     <div class="hero-badge">🚀 O Futuro do Mercado Imobiliário!</div>
     <h1>Pare de buscar imóveis.<br><span>Comece a fechar negócios.</span></h1>
     <p>Migre para o modelo Nonstop. Educação diária e ferramentas exclusivas para alta performance.</p>
+    <a href="#planos-nonstop" class="hero-cta-btn">Conheça os diferenciais do assinante Nonstop →</a>
   </div>
 </header>
 
@@ -930,7 +936,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-d
     </a>
 </section>
 <!-- EDUCAÇÃO + FERRAMENTA = RESULTADO -->
-<section class="edu-section">
+<section class="edu-section" id="diferenciais">
   <div class="edu-inner">
     <div class="edu-header">
       <h2 class="edu-title">Educação + Ferramenta = Resultado</h2>
@@ -1273,50 +1279,107 @@ body{background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-d
         <tbody>
           <tr>
             <td class="hora">08h</td>
-            <td><div class="ci ci-pl"><span class="cn">Plantão</span><span class="cs">Dúvidas</span></div></td>
+            <td><div class="ci ci-pl"><span class="cn" style="font-size:7.5px;font-weight:800;">Plantão de Dúvidas</span><span class="cdur">45 min</span></div></td>
             <td><div class="ci ci-em"><span class="cn">—</span></div></td>
-            <td><div class="ci ci-pl"><span class="cn">Plantão</span><span class="cs">Dúvidas</span></div></td>
+            <td><div class="ci ci-pl"><span class="cn" style="font-size:7.5px;font-weight:800;">Plantão de Dúvidas</span><span class="cdur">45 min</span></div></td>
             <td><div class="ci ci-em"><span class="cn">—</span></div></td>
-            <td><div class="ci ci-pl"><span class="cn">Plantão</span><span class="cs">Dúvidas</span></div></td>
+            <td><div class="ci ci-pl"><span class="cn" style="font-size:7.5px;font-weight:800;">Plantão de Dúvidas</span><span class="cdur">45 min</span></div></td>
           </tr>
           <tr>
             <td class="hora">09h</td>
-            <td><div class="ci ci-on"><span class="cn">Onboarding</span></div></td>
-            <td><div class="ci ci-on"><span class="cn">Onboarding</span></div></td>
-            <td><div class="ci ci-on"><span class="cn">Onboarding</span></div></td>
-            <td><div class="ci ci-on"><span class="cn">Onboarding</span></div></td>
-            <td><div class="ci ci-on"><span class="cn">Onboarding</span></div></td>
+            <td><div class="ci ci-on"><span class="cn">Onboarding</span><span class="cdur">1h</span></div></td>
+            <td><div class="ci ci-on"><span class="cn">Onboarding</span><span class="cdur">1h</span></div></td>
+            <td><div class="ci ci-on"><span class="cn">Onboarding</span><span class="cdur">1h</span></div></td>
+            <td><div class="ci ci-on"><span class="cn">Onboarding</span><span class="cdur">1h</span></div></td>
+            <td><div class="ci ci-on"><span class="cn">Onboarding</span><span class="cdur">1h</span></div></td>
           </tr>
           <tr>
             <td class="hora">11h</td>
-            <td><div class="ci ci-tem"><span class="cn">Portfolio</span><span class="cs">Qualidade</span></div></td>
-            <td><div class="ci ci-tem"><span class="cn">Precificação</span></div></td>
-            <td><div class="ci ci-tem"><span class="cn">Site do</span><span class="cs">Corretor</span></div></td>
-            <td><div class="ci ci-tem"><span class="cn">IA e Portais</span></div></td>
-            <td><div class="ci ci-tem"><span class="cn">Gestão</span><span class="cs">Exclusiva</span></div></td>
+            <td><div class="ci ci-tem"><span class="cn">Portfolio</span><span class="cs">Qualidade</span><span class="cdur">1h30</span></div></td>
+            <td><div class="ci ci-tem"><span class="cn">Precificação</span><span class="cdur">1h30</span></div></td>
+            <td><div class="ci ci-tem"><span class="cn">Site do</span><span class="cs">Corretor</span><span class="cdur">1h30</span></div></td>
+            <td><div class="ci ci-tem"><span class="cn">IA e Portais</span><span class="cdur">1h30</span></div></td>
+            <td><div class="ci ci-tem"><span class="cn">Gestão</span><span class="cs">Exclusiva</span><span class="cdur">1h30</span></div></td>
           </tr>
           <tr>
             <td class="hora">14h</td>
-            <td><div class="ci ci-on"><span class="cn">Onboarding</span></div></td>
-            <td><div class="ci ci-on"><span class="cn">Onboarding</span></div></td>
-            <td><div class="ci ci-on"><span class="cn">Onboarding</span></div></td>
-            <td><div class="ci ci-on"><span class="cn">Onboarding</span></div></td>
-            <td><div class="ci ci-on"><span class="cn">Onboarding</span></div></td>
+            <td><div class="ci ci-on"><span class="cn">Onboarding</span><span class="cdur">1h</span></div></td>
+            <td><div class="ci ci-on"><span class="cn">Onboarding</span><span class="cdur">1h</span></div></td>
+            <td><div class="ci ci-on"><span class="cn">Onboarding</span><span class="cdur">1h</span></div></td>
+            <td><div class="ci ci-on"><span class="cn">Onboarding</span><span class="cdur">1h</span></div></td>
+            <td><div class="ci ci-on"><span class="cn">Onboarding</span><span class="cdur">1h</span></div></td>
           </tr>
           <tr>
             <td class="hora">16h</td>
             <td><div class="ci ci-em"><span class="cn">—</span></div></td>
-            <td><div class="ci ci-pl"><span class="cn">Plantão</span><span class="cs">Dúvidas</span></div></td>
+            <td><div class="ci ci-pl"><span class="cn" style="font-size:7.5px;font-weight:800;">Plantão de Dúvidas</span><span class="cdur">45 min</span></div></td>
             <td><div class="ci ci-em"><span class="cn">—</span></div></td>
-            <td><div class="ci ci-pl"><span class="cn">Plantão</span><span class="cs">Dúvidas</span></div></td>
+            <td><div class="ci ci-pl"><span class="cn" style="font-size:7.5px;font-weight:800;">Plantão de Dúvidas</span><span class="cdur">45 min</span></div></td>
             <td><div class="ci ci-em"><span class="cn">—</span></div></td>
           </tr>
         </tbody>
       </table>
       <div class="leg">
-        <div class="li"><div class="ld" style="background:var(--navy)"></div>Onboarding</div>
-        <div class="li"><div class="ld" style="background:var(--teal)"></div>Temático</div>
-        <div class="li"><div class="ld" style="background:#eff6ff;border:1px solid #bfdbfe"></div>Plantão</div>
+        <div class="li"><div class="ld" style="background:var(--navy)"></div><div><strong>Onboarding</strong> — Explicação geral sobre toda a Nonstop e ferramentas!</div></div>
+        <div class="li"><div class="ld" style="background:var(--teal)"></div><div><strong>Temático</strong> — Uso das ferramentas no dia a dia e insights!</div></div>
+        <div class="li"><div class="ld" style="background:#eff6ff;border:1px solid #bfdbfe"></div><div><strong>Plantão de Dúvidas</strong> — Horário livre para dúvidas sobre o sistema</div></div>
+      </div>
+    </div>
+
+    <div class="card agenda-wrap">
+      <div class="agenda-top">
+        <div class="agenda-ttl">Grade semanal</div>
+        <div class="agenda-badge">Maio 2026</div>
+      </div>
+      <table class="tbl">
+        <thead><tr><th class="hc"></th><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="hora">08h</td>
+            <td><div class="ci ci-pl"><span class="cn" style="font-size:7.5px;font-weight:800;">Plantão de Dúvidas</span><span class="cdur">45 min</span></div></td>
+            <td><div class="ci ci-em"><span class="cn">—</span></div></td>
+            <td><div class="ci ci-em"><span class="cn">—</span></div></td>
+            <td><div class="ci ci-em"><span class="cn">—</span></div></td>
+            <td><div class="ci ci-em"><span class="cn">—</span></div></td>
+          </tr>
+          <tr>
+            <td class="hora">09h</td>
+            <td><div class="ci ci-on"><span class="cn">Onboarding</span><span class="cdur">1h</span></div></td>
+            <td><div class="ci ci-em"><span class="cn">—</span></div></td>
+            <td><div class="ci ci-on"><span class="cn">Onboarding</span><span class="cdur">1h</span></div></td>
+            <td><div class="ci ci-em"><span class="cn">—</span></div></td>
+            <td><div class="ci ci-em"><span class="cn">—</span></div></td>
+          </tr>
+          <tr>
+            <td class="hora">11h</td>
+            <td><div class="ci ci-em"><span class="cn">—</span></div></td>
+            <td><div class="ci ci-tem"><span class="cn" style="font-weight:800;">Gestão Exclusiva,</span><span class="cs" style="font-weight:800;">Precificação e Captação</span><span class="cdur">1h30</span></div></td>
+            <td><div class="ci ci-em"><span class="cn">—</span></div></td>
+            <td><div class="ci ci-em"><span class="cn">—</span></div></td>
+            <td><div class="ci ci-tem"><span class="cn">Marketing Digital:</span><span class="cs">Site + IA + Portais!</span><span class="cdur">1h30</span></div></td>
+          </tr>
+          <tr>
+            <td class="hora">14h</td>
+            <td><div class="ci ci-em"><span class="cn">—</span></div></td>
+            <td><div class="ci ci-on"><span class="cn">Onboarding</span><span class="cdur">1h</span></div></td>
+            <td><div class="ci ci-em"><span class="cn">—</span></div></td>
+            <td><div class="ci ci-on"><span class="cn">Onboarding</span><span class="cdur">1h</span></div></td>
+            <td><div class="ci ci-em"><span class="cn">—</span></div></td>
+          </tr>
+          <tr>
+            <td class="hora">16h</td>
+            <td><div class="ci ci-em"><span class="cn">—</span></div></td>
+            <td><div class="ci ci-em"><span class="cn">—</span></div></td>
+            <td><div class="ci ci-em"><span class="cn">—</span></div></td>
+            <td><div class="ci ci-pl"><span class="cn" style="font-size:7.5px;font-weight:800;">Plantão de Dúvidas</span><span class="cdur">45 min</span></div></td>
+            <td><div class="ci ci-em"><span class="cn">—</span></div></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="leg">
+        <div class="li"><div class="ld" style="background:var(--navy)"></div><div><strong>Onboarding</strong> — Explicação geral sobre toda a Nonstop e ferramentas!</div></div>
+        <div class="li"><div class="ld" style="background:var(--teal)"></div><div><strong>Temático</strong> — Uso das ferramentas no dia a dia e insights!</div></div>
+        <div class="li"><div class="ld" style="background:#eff6ff;border:1px solid #bfdbfe"></div><div><strong>Plantão de Dúvidas</strong> — Horário livre para dúvidas sobre o sistema</div></div>
       </div>
     </div>
   </div>
@@ -1495,6 +1558,87 @@ function submitCRM() {
   }).catch(() => {});
   document.getElementById('crm-success').style.display = 'block';
 }
+</script>
+
+<!-- BANNER FLUTUANTE — GESTÃO EXCLUSIVA -->
+<div id="ge-banner" style="
+  position:fixed;
+  bottom:28px;
+  right:28px;
+  z-index:9999;
+  width:272px;
+  background:linear-gradient(135deg,#101B24 0%,#0E51A0 100%);
+  border-radius:16px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.35),0 0 0 1px rgba(255,255,255,0.08);
+  padding:20px 20px 18px;
+  display:none;
+  flex-direction:column;
+  gap:12px;
+  animation:ge-slidein .35s cubic-bezier(.22,1,.36,1);
+">
+  <style>
+    @keyframes ge-slidein{
+      from{opacity:0;transform:translateY(20px);}
+      to{opacity:1;transform:translateY(0);}
+    }
+    #ge-banner .ge-close{
+      position:absolute;top:10px;right:12px;
+      background:rgba(255,255,255,0.1);border:none;cursor:pointer;
+      color:rgba(255,255,255,0.6);font-size:14px;font-weight:700;
+      width:24px;height:24px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      transition:background .15s,color .15s;line-height:1;
+    }
+    #ge-banner .ge-close:hover{background:rgba(255,255,255,0.2);color:#fff;}
+    #ge-banner .ge-kicker{
+      font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+      color:#60a5fa;margin-bottom:2px;
+    }
+    #ge-banner .ge-title{
+      font-family:'Baloo 2','Outfit',sans-serif;
+      font-size:17px;font-weight:800;color:#fff;line-height:1.25;
+    }
+    #ge-banner .ge-sub{
+      font-size:12px;color:rgba(255,255,255,0.65);line-height:1.5;
+    }
+    #ge-banner .ge-btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:6px;
+      background:#fff;color:#0E51A0;
+      font-size:13px;font-weight:800;
+      padding:10px 16px;border-radius:8px;
+      text-decoration:none;
+      transition:background .15s,transform .15s;
+      margin-top:2px;
+    }
+    #ge-banner .ge-btn:hover{background:#e8f0fe;transform:translateY(-1px);}
+    #ge-banner .ge-btn svg{width:13px;height:13px;fill:currentColor;flex-shrink:0;}
+  </style>
+
+  <button class="ge-close" onclick="document.getElementById('ge-banner').style.display='none'" title="Fechar">✕</button>
+
+  <div>
+    <div class="ge-kicker">✦ Curso Nonstop</div>
+    <div class="ge-title">Gestão Exclusiva</div>
+    <div class="ge-sub" style="margin-top:6px;">Aprenda o método completo para gerir imóveis com alta performance e fechar mais negócios.</div>
+  </div>
+
+  <a href="https://gestaoexclusiva.com/" target="_blank" rel="noopener noreferrer" class="ge-btn">
+    Saiba mais
+    <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+  </a>
+</div>
+
+<script>
+(function(){
+  var banner = document.getElementById('ge-banner');
+  var shown = false;
+  window.addEventListener('scroll', function(){
+    if(!shown && window.scrollY > 300){
+      shown = true;
+      banner.style.display = 'flex';
+    }
+  });
+})();
 </script>
 
 </body>
